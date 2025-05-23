@@ -198,7 +198,6 @@ def extract_race_data(soup, raceName, defaultSource):
         return None
         
     # loop over each element in the page checking each one 
-    # 
     elmnt = soup.contents[0]
     while elmnt:
         if elmnt.text == '\n' or elmnt.find("div", {"id": "toc-action-bar"}):
@@ -482,3 +481,159 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+## web page pattern/format notes ##
+# (source/name)  H1 and/or H2
+# (descrition )  p
+#                (optional) tabl, ul, more p
+# (content    )  ul...
+
+
+# Description:
+#  may hold multiple p tags, tables, or ul
+#  will end with a p tag or table
+#
+#  if current tag is p
+#    if next tag is table
+#       when tag is no longer table
+#         switch to content
+#    if next tag is ul 
+#      if next next tag is ul or if there is no next next tag
+#        switch to content
+
+
+# Content:
+#  all tags are formatted before adding to class
+#
+#  if tag not table
+#    name = tag.li.strong.text
+#    if name is known trait (age, speed, ...)
+#      add to matching class variable
+#    else 
+#      handle as feature
+#  else if table
+#    if header in table and header contains a previous feature name
+#      add to matching feature
+#    else
+#      add to previous feature
+
+
+# formatter functions take in a single tag and output the 
+#  inline string form
+#
+# ListFormatter(ul tag)
+#  handles nested lists
+#  uses LinkFormatter() 
+#
+# TableFormatter(table tag, name='')
+#  accepts optional table name arg (use for preceding p tags)
+#  uses LinkFormatter() 
+#
+# LinkFormatter(a tag)
+
+
+    
+## Identified patterns in Setting Specific race pages ##
+
+## THEROS, Ravnica, Plane Shift, Dragonlance
+# (desc)    p
+# (titile)  h2   ('Features'/'Traits')
+# (source)  p    ('Source: ...')
+# (content) ul
+## ##
+
+
+## Plane Shift ##
+# (desc)    p
+# (source)  h1
+# (desc)    p
+# (content) ul
+#
+# (source)  h1
+# (desc)    p
+# (content) ul
+
+# (desc)    p
+# (titile)  h1   ('Features'/'Traits')
+# (content) ul
+#
+# (source)  h1
+# (sub race)h2
+# (desc)    p
+# (content) ul
+## Plane Shift ##
+
+
+## SPELLJAMMER ##
+# (source)  p    ('Source: ...')
+# (desc)    p
+# (titile)  h5   ('Features'/'Traits')
+# (content) ul
+
+# (source)  p    ('Source: ...')
+# (desc)    p
+# (table h) h5
+# (table)   table
+# (titile)  h5   ('Features'/'Traits')
+# (content) ul
+## SPELLJAMMER ##
+
+
+## Ravnica, Plane Shift ##
+# (desc)    p
+# (source)  h1
+# (content) ul
+#
+# (source)  h1
+# (content) ul
+## Ravnica, Plane Shift ##
+
+
+## Ravenloft ##
+# (desc)          p
+# (source)        h1
+# (desc cont.)    h3, p, table
+# (title)         h2
+# (content)       ul
+#
+# (source prefix) h1
+# (source final)  p   ('Source:...')
+# (desc cont.)    h3, p, table
+# (title)         h2
+# (content)       ul
+## Ravenloft ##
+
+
+## Eberron ##
+# (desc)          p
+# (source)        h1
+# (content)       ul
+#
+# (source prefix) h1
+# (title)         h2  ('Features'/'Traits')
+# (source final)  p   ('Source:...')
+# (content)       ul
+#
+# (sub race)      h2
+# (desc)          p
+# (content)       ul
+
+# (desc)    p
+# (source)  h1
+# (content) ul
+#
+# (source prefix) h1
+# (source final)  p   ('Source: ...')(may hold prefix already)
+# (content)       ul
+## Eberron ##
+
+
+# p     desc/source final ("Source: ...")(source final may contain source prefix)
+# h1    separator ('Features'/'Traits')/source prefix (prefix + final = full source)
+# h2    subclass/separator ('Features'/'Traits')
+# h3    subsection title in description
+# h5    table name/separator ('Features'/'Traits')
+# ul    content
+
+# source - marks a new entry
