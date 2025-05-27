@@ -4,4 +4,5 @@ This project was developed locally without a repo. This branch is to show the ma
 <br><br>
 
 ## DnDWebScrape-Races(v2)
-Old version. Code includes notes and commented out sections that were used for testing (not cleaned up).
+Code includes notes and commented out sections that were used for testing (not cleaned up).
+Follows a diffeent structure for reading data from web page than the structure found in the final vesion as well as slight differences in the formatting of the output text.
