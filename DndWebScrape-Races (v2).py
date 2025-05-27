@@ -319,10 +319,9 @@ def LinkFormatter(linkTag):
 
 def main():
 
-    url = "https://dnd5e.wikidot.com/lineage:verdan"#input("Enter the URL of the website you want to scrape: ")
-    target_element = "div page-content"#input("Enter your target element in the format (html element) (id) (class), separated by spaces: ")
+    url = "https://dnd5e.wikidot.com/lineage:verdan"
+    target_element = "div page-content" # (html element) (id) (class)
 
-    # Split the input into html element, id, and class
     targets = target_element.split()
     element, identifier, css_class = [None,None,None]
 
