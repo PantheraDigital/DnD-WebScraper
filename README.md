@@ -1,5 +1,3 @@
-These are the scripts I use to make CSVs that are used in Google Sheets to act as a database for my [Character Sheet](https://pantheradigital.github.io/CharacterSheet/) project.
-
 ## DnDWebScrape-Races
 Pulls a specified webpage for DnD races found on wikidot.com, parses the page elements to determine what data they hold, formats the data into plain text with Markdown-Like elements for lists/tables/links, then places data into a CSV. 
 
